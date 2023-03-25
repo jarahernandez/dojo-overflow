@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/formpages.css') }}">
+    <title>Profile page</title>
+</head>
+<body>
+    <div class="d-flex flex-column justify-content-center">
+        <div class="my-nav">
+        <div class="container navbar d-flex justify-content-start">
+            <div class="display-1"> My Posts</div>
+        </div>
+        <div class="container navbar d-flex justify-content-end">
+                <a href="/clearsession" class="btn btn-info m-2" role="button"> Log Out</a>
+                <a href="/dashboard" class="btn btn-info m-2" role="button"> Home</a>
+            </div>
+        </div>
+        
+    <div class="d-flex flex-column">
+        <div class="text-white p-5">
+            <form action="/create/post/" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}                            
+                    {% for message in messages %}            
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %} 
+            <div class="form-section">
+                <label for="post_title" class="col-form-label-lg">Post Title</label><br>
+                <input type="text" id="name" class="form-control-lg" name="name"></br>
+                <textarea maxlength="3000" id="post_content" name="post_content" class="form-control-lg" rows="5" cols="33"></textarea><br>
+            <input type="submit" class="btn btn-warning mt-5" value="Publish Post">
+            </form> 
+        </div>
+
+    <div class="container">
+        <table class="table table-hover text-white">
+            <thead>
+                <tr>
+                <th scope="col"> Title </th>
+                <th scope="col"> Content </th>
+                <th scope="col"> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for each_post in posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+                <td>{{post.title}}</td>
+                <td>{{post.content}} </td>
+                <!-- <td> NUMBER OF LIKES</td> -->
+                        <a href="/edit_post/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                        <a href="/delete_post/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                    {% endif %}
+                </td>
+            </tr>
+                {%endfor%}
+        </tbody>
+    </table>
+    </div>
+
+        </div>   

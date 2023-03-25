@@ -1,0 +1,33 @@
+
+
+    body {
+        background-color: black;
+    }
+    
+    .main-container {
+        background-size: cover;
+    }
+    
+    .display-1 {
+        color: white;
+        font-family: sans-serif;
+        font-style: italic;
+        }
+    
+    .my-nav {
+        background-color: black;
+        border-bottom: white solid 2px;
+        display: flex;
+        align-items: center;
+        padding:3%;
+    
+    }
+    
+    .table-container { 
+        font: white !important;
+    }
+    
+    .section {
+        padding-bottom: 30px;
+        border-bottom: white 1px solid;
+    }

@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.bg {
+    /* The image used */
+    background-image: url("../css/images/login");
+  
+    /* Full height */
+    height: 100vh;
+    width: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.display-1 {
+    color: white;
+    font-family: sans-serif;
+    font-style: italic;
+    }
+
+h3 {
+    color: white;
+    font-weight: lighter;
+    font-style: italic;
+  }
+
+.header {
+    padding: 5%;
+  }
+
+.form-section { 
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+  }
+
+label {
+  color: rgb(236, 234, 218);
+  margin: 2px;
+  }
+
+.error {
+    color: red;
+    font-size: small;
+  }
+
+form { 
+    max-width: 300px;
+  }
+
+.container {
+    margin-bottom: 5%;
+  }
+
+.my-nav {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
