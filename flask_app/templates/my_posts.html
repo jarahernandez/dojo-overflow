@@ -23,7 +23,7 @@
         
     <div class="d-flex flex-column">
         <div class="text-white p-5">
-            <form action="/create/post/" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
+            <form action="/posts/create" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}                            
                     {% for message in messages %}            
@@ -34,7 +34,7 @@
             <div class="form-section">
                 <label for="post_title" class="col-form-label-lg">Post Title</label><br>
                 <input type="text" id="name" class="form-control-lg" name="name"></br>
-                <textarea maxlength="3000" id="post_content" name="post_content" class="form-control-lg" rows="5" cols="33"></textarea><br>
+                <textarea maxlength="3000" id="content" name="content" class="form-control-lg" rows="5" cols="33"></textarea><br>
             <input type="submit" class="btn btn-warning mt-5" value="Publish Post">
             </form> 
         </div>
@@ -53,8 +53,8 @@
                 <td>{{post.title}}</td>
                 <td>{{post.content}} </td>
                 <!-- <td> NUMBER OF LIKES</td> -->
-                        <a href="/edit_post/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                        <a href="/delete_post/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                        <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                        <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                     {% endif %}
                 </td>
             </tr>

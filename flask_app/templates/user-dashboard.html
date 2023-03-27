@@ -17,7 +17,7 @@
             </div>
             <div class="container navbar d-flex justify-content-end">
                     <a href="/logout" class="btn btn-info m-2" role="button"> Log Out</a> 
-                    <a href="/dashboard" class="btn btn-info m-2" role="button"> My Profile</a>  
+                    <a href="/posts/my_posts" class="btn btn-info m-2" role="button"> My Profile</a>  
                 </div>
         </div>
 
@@ -41,8 +41,8 @@
                             <!-- <td> NUMBER OF LIKES</td> -->
                                 <a href="/post/{{post.id}}"> Like Post</a>  <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% if session['user_id'] == post.creator.id %}
-                                    <a href="/edit_post/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                                    <a href="/delete_post/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% endif %}
                             </td>
                         </tr>
