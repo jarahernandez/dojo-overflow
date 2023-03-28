@@ -5,9 +5,9 @@ class MySQLConnection:
 
         connection = pymysql.connect(host='localhost',
                                     user = 'root',
-                                    password = 'mypass',
+                                    password = 'root',
                                     db = db,
-                                    charset = 'utf8m4',
+                                    charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
                                     autocommit = True)
         
@@ -28,7 +28,8 @@ class MySQLConnection:
                 else:
                     self.connection.commit()
             except Exception as e:
-                print("Something went wrong",e)
+                print("QUERY FAILED:" , query)
+                print("SQL ERROR:",e)
                 return False
             finally:
                 self.connection.close()

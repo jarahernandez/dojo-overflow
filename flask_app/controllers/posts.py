@@ -8,7 +8,7 @@ from flask_app.models import user, post
 @app.route('/posts/my_posts')
 def user_posts_and_create_page():
     if 'user_id' not in session:
-        redirect('/')
+        return redirect('/')
     data ={
         'id': session['user_id'],
     }
@@ -19,7 +19,7 @@ def user_posts_and_create_page():
 @app.route('/posts/edit/<int:id>')
 def edit_post_page(id):
     if 'user_id' not in session:
-        redirect('/')
+        return redirect('/')
     data ={
         'id': id,
     }
@@ -32,7 +32,7 @@ def edit_post_page(id):
 @app.route('/posts/create', methods = ['POST'])
 def create_post():
     if 'user_id' not in session:
-        redirect('/')
+        return redirect('/')
     if not post.Post.validate_post(request.form):
         return redirect('/posts/my_posts')
     data = {
@@ -41,6 +41,7 @@ def create_post():
         'user_id': session['user_id']
     }
     post.Post.add_post_to_db(data)
+    print("CREATE POST -->",data)
     return redirect('/posts/my_posts')
 
 
@@ -48,7 +49,7 @@ def create_post():
 @app.route('/update/post/<int:id>', methods = ['POST'])
 def update_post(id):
     if 'user_id' not in session:
-        redirect('/')
+        return redirect('/')
     if not post.Post.validate_post(request.form):
         return redirect(f'/posts/edit/{id}')
     data = {
@@ -61,10 +62,10 @@ def update_post(id):
 
 
 #Route to delete a post
-@app.route('/posts/delete/<int:id>', methods = ['POST'])
+@app.route('/posts/delete/<int:id>')
 def delete_post(id):
     if 'user_id' not in session:
-        redirect('/')
+        return redirect('/')
     data ={
         'id': id,
     }

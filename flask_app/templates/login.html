@@ -58,7 +58,7 @@
         <div class="rightside">
             <div class="container mt-5">
                 <h3>Login</h3>
-                     <!-- <form action="/login" method="POST">  NEEDS RIGHT ROUTE -->
+                     <form action='/return-user' method="POST">  
                         {% with messages = get_flashed_messages() %}     
                         {% if messages %}                            
                             {% for message in messages %}            
@@ -67,14 +67,15 @@
                         {% endif %}
                     {% endwith %} 
                 <div class="form-group">  
-                    <label for="email">Email:</label>
-                    <input type="text" class="form-control" name="email">
+                    <label for="return_email">Email:</label>
+                    <input type="text" class="form-control" name="return_email">
                 </div>  
                 <div class="form-group"> 
-                    <label for="password" >Password:</label>
-                    <input type="text" class="form-control" name="password">
+                    <label for="return_password" >Password:</label>
+                    <input type="text" class="form-control" name="return_password">
                 </div>
                     <input type="submit" class="btn btn-light mt-3" value="Login" >
+                </form>
             </div>
         </form-section>
         </div>
