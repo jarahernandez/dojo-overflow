@@ -35,9 +35,9 @@ class User:
         INSERT INTO users (first_name, last_name, email, password) 
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);
         """
-        id = connectToMySQL(cls.DB).query_db(query, data)
-        print("CREATE USER QUERY-->", id)
-        return id
+        _id = connectToMySQL("dojo_overflow").query_db(query, data)
+        print("CREATE USER QUERY-->", _id)
+        return _id
 
 
 
@@ -52,6 +52,7 @@ class User:
 
     @classmethod
     def get_email(cls, data):
+        print('B', data)
         query = "SELECT * FROM users WHERE email= %(email)s;"
         results = connectToMySQL(cls.DB).query_db(query, data)
         print("GET_EMAIL QUERY -->", results)
@@ -74,6 +75,7 @@ class User:
                 "email": user['email']
             }
         user_in_db = User.get_email(data)
+        print('A',user_in_db)
         if user_in_db:
             flash("Email already taken.")
             is_valid = False

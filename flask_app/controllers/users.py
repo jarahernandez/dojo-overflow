@@ -31,7 +31,23 @@ def user_page():
     data = {
         "id": session['user_id']
     }
-    return render_template("user-dashboard.html", logged_in_user = User.get_user_id(data))
+    return render_template("user-dashboard.html", logged_in_user = User.get_user_id(data), all_posts=Post.get_all_posts())
+
+@app.route('/return-user', methods=["POST"])
+def login():
+    print("login-->", request.form)
+    data ={
+        "email": request.form['return_email']
+    }
+    user_in_db = User.get_email(data)
+    if not user_in_db:
+        flash("Invalid Password/Email")
+        return redirect('/')
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['return_password']):
+        flash("Invalid Password/Email")
+        return redirect('/')
+    session['user_id'] = user_in_db.id
+    return redirect('/dashboard')
 
 
 @app.route('/logout')

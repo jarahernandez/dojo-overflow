@@ -13,7 +13,7 @@
 <body>
         <div class="my-nav">
             <div class="container navbar d-flex justify-content-start">
-                <div class="display-1"> Welcome {{user.first_name}}</div> 
+                <div class="display-1"> Welcome {{logged_in_user.first_name}}</div> 
             </div>
             <div class="container navbar d-flex justify-content-end">
                     <a href="/logout" class="btn btn-info m-2" role="button"> Log Out</a> 
@@ -30,17 +30,17 @@
                             <th scope="col"> Title </th>
                             <th scope="col"> Content </th>
                             <th scope="col"> Likes </th>
-                            <th scope="col"> Actions </th>
+                            <!-- <th scope="col"> Actions </th> -->
                             </tr>
                         </thead>
                         <tbody>
-                        {% for post in posts %}
-                            <td>{{post.creator.firstname}}</td>
+                        {% for post in all_posts %}
+                            <td>{{post.user.first_name}}</td>
                             <td>{{post.title}}</td>
                             <td>{{post.content}} </td>
                             <!-- <td> NUMBER OF LIKES</td> -->
                                 <a href="/post/{{post.id}}"> Like Post</a>  <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                                {% if session['user_id'] == post.creator.id %}
+                                {% if session['user_id'] == post.user.id %}
                                     <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                     <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% endif %}

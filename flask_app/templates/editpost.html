@@ -22,7 +22,7 @@
         </div>
         
         <div class="text-white p-5">
-            <form action="/update/post/{{post.id}}" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
+            <form action="/update/post/{{this_post.id}}" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}                            
                     {% for message in messages %}            
@@ -31,9 +31,9 @@
                 {% endif %}
             {% endwith %} 
             <div class="form-section">
-                <label for="post_title" class="col-form-label-lg">Post Title</label><br>
-                <input type="text" id="name" class="form-control-lg" name="name" value="{{post.title}}"></br>
-                <textarea maxlength="3000" id="post_content" name="post_content" value="{{post.content}}" class="form-control-lg" rows="5" cols="33"></textarea><br>
+                <label for="title" class="col-form-label-lg">Post Title</label><br>
+                <input type="text" id="name" class="form-control-lg" name="title" value="{{this_post.title}}"></br>
+                <textarea maxlength="3000" id="post_content" name="content" class="form-control-lg" rows="5" cols="33">{{this_post.content}}</textarea><br>
             <input type="submit" class="btn btn-warning mt-5" value="Update Post">
             </form> 
         </div>

@@ -17,7 +17,7 @@
         </div>
         <div class="container navbar d-flex justify-content-end">
                 <a href="/logout" class="btn btn-info m-2" role="button"> Log Out</a>
-                <a href="/" class="btn btn-info m-2" role="button"> Home</a>
+                <a href="/dashboard" class="btn btn-info m-2" role="button"> Home</a>
             </div>
         </div>
         
@@ -32,8 +32,8 @@
                 {% endif %}
             {% endwith %} 
             <div class="form-section">
-                <label for="post_title" class="col-form-label-lg">Post Title</label><br>
-                <input type="text" id="name" class="form-control-lg" name="name"></br>
+                <label for="title" class="col-form-label-lg">Post Title</label><br>
+                <input type="text" id="name" class="form-control-lg" name="title"></br>
                 <textarea maxlength="3000" id="content" name="content" class="form-control-lg" rows="5" cols="33"></textarea><br>
             <input type="submit" class="btn btn-warning mt-5" value="Publish Post">
             </form> 
@@ -49,16 +49,19 @@
                 </tr>
             </thead>
             <tbody>
-            {% for each_post in posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
-                <td>{{post.title}}</td>
-                <td>{{post.content}} </td>
+            {% for each_post in posts_by_user %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+                <td>{{each_post.title}}</td>
+                <td>{{each_post.content}} </td>
                 <!-- <td> NUMBER OF LIKES</td> -->
-                        <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                        <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                    {% endif %}
+                <td>
+
+                    <a href="/posts/edit/{{each_post.id}}" style="margin-right: 10px;">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                    <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                </td>
+                    {% endfor %}
                 </td>
             </tr>
-                {%endfor%}
+                
         </tbody>
     </table>
     </div>

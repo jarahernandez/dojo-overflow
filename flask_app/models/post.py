@@ -18,9 +18,9 @@ class Post:
     def add_post_to_db(cls, data):
         query = """
         INSERT INTO posts 
-        (title, content, user_id) 
+        (title, content, users_id) 
         VALUES
-        (%(title)s, %(content)s, %(id)s);
+        (%(title)s, %(content)s, %(user_id)s);
         """
         return connectToMySQL(cls.DB).query_db(query, data)
     
@@ -30,10 +30,11 @@ class Post:
         query = """
         SELECT * FROM posts
         RIGHT JOIN users
-        ON posts.user_id = users.id
+        ON posts.users_id = users.id
         WHERE users.id = %(id)s;
         """
         results = connectToMySQL(cls.DB).query_db(query, data)
+        print(results)
         if len(results) == 0:
             return []
         else:
@@ -60,7 +61,7 @@ class Post:
         query = """
         SELECT * FROM posts 
         JOIN users 
-        ON posts.user_id = users.id;
+        ON posts.users_id = users.id;
         """
         results = connectToMySQL(cls.DB).query_db(query)
         if len(results) == 0:
@@ -89,7 +90,7 @@ class Post:
         query = """
         SELECT * FROM posts 
         JOIN users 
-        ON posts.user_id = users.id
+        ON posts.users_id = users.id
         WHERE posts.id = %(id)s;
         """
         results = connectToMySQL(cls.DB).query_db(query, data)
