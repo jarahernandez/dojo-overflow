@@ -27,7 +27,7 @@ def create_user():
 @app.route('/dashboard')
 def user_page():
     if "user_id" not in session:
-        return ('/')
+        return redirect('/')
     data = {
         "id": session['user_id']
     }
