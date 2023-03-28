@@ -41,8 +41,8 @@
                             <!-- <td> NUMBER OF LIKES</td> -->
                                 <a href="/post/{{post.id}}"> Like Post</a>  <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% if session['user_id'] == post.user.id %}
-                                    <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                                    <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/edit/{{post.id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/delete/{{post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% endif %}
                             </td>
                         </tr>
