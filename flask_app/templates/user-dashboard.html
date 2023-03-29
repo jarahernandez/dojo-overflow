@@ -4,60 +4,123 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/formpages.css') }}">
+    <title>My Post</title>
 </head>
-
+<div class="bg">
 <body>
+    <div class="d-flex flex-column justify-content-center">
         <div class="my-nav">
-            <div class="container navbar d-flex justify-content-start">
-                <div class="display-1"> Welcome {{logged_in_user.first_name}}</div> 
-            </div>
-            <div class="container navbar d-flex justify-content-end">
-                    <a href="/logout" class="btn btn-info m-2" role="button"> Log Out</a> 
-                    <a href="/posts/my_posts" class="btn btn-info m-2" role="button"> My Profile</a>  
-                </div>
+        <div class="container navbar d-flex justify-content-start">
+            <div class="display-1"> My Post</div>
         </div>
-
-        <div class="row col-md-auto ml-5"> 
-            <div class="table-responsive-md">
-                <table class="table table-hover text-white">
-                        <thead>
-                            <tr>
-                            <th scope="col"> Posted By</th>
-                            <th scope="col"> Title </th>
-                            <th scope="col"> Content </th>
-                            <th scope="col"> Likes </th>
-                            <th scope="col"> Actions</th>
-                            <!-- <th scope="col"> Actions </th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for post in all_posts %}
-                            <td>{{post.user.first_name}} {{post.user.last_name}}</td>
-                            <td>{{post.title}}</td>
-                            <td>{{post.content}} </td>
-                            <td> NUMBER OF LIKES</td>
-                                <!-- <a href="/posts/like/{{post.id}}"> Like Post</a>  <td> Needs JINJA CONFRIMFATION </td> -->
-                            <td>
-                                {% if session['user_id'] == post.user.id %}
-                                    <a href="/posts/edit/{{post.id}}">Edit</a> 
-                                    <a href="/posts/delete/{{post.id}}">Delete</a> 
-                                {% else %}
-                                <form action="/posts/like/{{post.id}}" method="post">
-                                    <input type="submit" value="Like Post"/> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                                </form>
-                                {% endif %}
-                            </td>
-                        </tr>
-                            {%endfor%}
-                    </tbody>
-                </table>
+        <div class="container navbar d-flex justify-content-end">
+                <a href="/logout" class="btn btn-info m-2" role="button"> Log Out</a>
+                <a href="/dashboard" class="btn btn-info m-2" role="button"> Home</a>
             </div>
-        </div>        
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
-</html>
+        </div>
+    </div>
+    
+    
+    <div class="d-flex flex-column align-items-center">
+        <div class="text-white p-2 d-flex flex-column align-items-center">
+            <h3 class="m-1"> Write a new post</h3>
+            <form action="/posts/create" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}                            
+                    {% for message in messages %}            
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %} 
+            <div class="form-section d-flex flex-column align-items-center">
+                <input type="text" id="name" class="form-control-lg m-1" name="title" placeholder="Post Title"><br>
+                <textarea maxlength="3000" id="content" name="content" class="form-control-lg" placeholder="Content" rows="5" cols="33"></textarea><br>
+            <input type="submit" class="btn btn-warning mt-1" value="Publish Post">
+            </form> 
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="display-3 text-white"> My Posts </div>
+        <div class="table-responsive">
+        <table class="table table-hover text-white">
+            <thead>
+    <div style="display: inline-flex;">
+
+        <div class="container">
+            <h2>Your posts</h2>
+            {% if posts_by_user[0].id != None %}
+            <table class="table table-hover text-white">
+                <thead>
+                    <tr>
+                        <th scope="col"> Title </th>
+                        <th scope="col"> Content </th>
+                        <th scope="col"> Actions </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for each_post in posts_by_user %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+                <tr>
+                    <td>{{each_post.title}}</td>
+                    <td>{{each_post.content}} </td>
+                    <!-- <td> NUMBER OF LIKES</td> -->
+                    <td>
+                        <a href="/posts/edit/{{each_post.id}}" style="margin-right: 10px;">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                        <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for each_post in posts_by_user %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+            <tr>
+                <td>{{each_post.title}}</td>
+                <td>{{each_post.content}} </td>
+                <!-- <td> NUMBER OF LIKES</td> -->
+                <td>
+
+                    <a href="/posts/edit/{{each_post.id}}" style="margin-right: 10px;">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                    <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                </td>
+                    {% endfor %}
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+                {% endfor %}
+            {% else %} 
+                <h3>You don't have any posts yet!</h3>
+            {% endif %}
+            </tbody>
+        </table>
+        </div>
+    
+        <!-- copy table -->
+        <div class="container">
+            <h2>liked posts</h2>
+            <table class="table table-hover text-white">
+                <thead>
+                    <tr>
+                        <th scope="col"> Title </th>
+                        <th scope="col"> Content </th>
+                        <th scope="col"> Posted By </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for one_like in liked_posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+                <tr>
+                    <td scope="row">{{one_like.title}}</td>
+                    <td scope="row">{{one_like.content}} </td>
+                    <td scope="row"> {{ one_like.first_name }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+
+</body>
+</div>
