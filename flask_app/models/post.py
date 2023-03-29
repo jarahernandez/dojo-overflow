@@ -131,6 +131,35 @@ class Post:
         """
         return connectToMySQL(cls.DB).query_db(query, data)
 
+    #Like a post on the database
+    @classmethod
+    def like_post_on_db(cls, data):
+        query = """
+        INSERT INTO post_favorites (users_id, posts_id) 
+        VALUES (%(user_id)s, %(post_id)s)
+        ;"""
+        return connectToMySQL(cls.DB).query_db(query, data)
+    
+    @classmethod
+    def get_liked_post_with_user(cls, data):
+        # query = """
+        # SELECT * FROM post_favorites 
+        # LEFT JOIN posts 
+        # ON post_favorites.posts_id = posts.id 
+        # WHERE post_favorites.users_id = %(id)s
+        # ;"""
+        query = """
+        SELECT * FROM post_favorites 
+        LEFT JOIN posts 
+        ON post_favorites.posts_id = posts.id 
+        LEFT JOIN users ON posts.users_id = users.id
+        WHERE post_favorites.users_id = %(id)s ;
+        ;"""
+        results = connectToMySQL(cls.DB).query_db(query, data)
+        print(results)
+        return results
+
+
     #Validations
     @staticmethod
     def validate_post(form_data):

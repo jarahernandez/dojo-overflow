@@ -47,10 +47,29 @@
         <div class="table-responsive">
         <table class="table table-hover text-white">
             <thead>
+    <div style="display: inline-flex;">
+
+        <div class="container">
+            <h2>Your posts</h2>
+            {% if posts_by_user[0].id != None %}
+            <table class="table table-hover text-white">
+                <thead>
+                    <tr>
+                        <th scope="col"> Title </th>
+                        <th scope="col"> Content </th>
+                        <th scope="col"> Actions </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for each_post in posts_by_user %} <!-- <td> should come from get_all_posts_user_id method </td> -->
                 <tr>
-                <th scope="col"> Title </th>
-                <th scope="col"> Content </th>
-                <th scope="col"> Actions </th>
+                    <td>{{each_post.title}}</td>
+                    <td>{{each_post.content}} </td>
+                    <!-- <td> NUMBER OF LIKES</td> -->
+                    <td>
+                        <a href="/posts/edit/{{each_post.id}}" style="margin-right: 10px;">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                        <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                    </td>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +88,36 @@
             </tr> 
         </tbody>
     </table>
+                {% endfor %}
+            {% else %} 
+                <h3>You don't have any posts yet!</h3>
+            {% endif %}
+            </tbody>
+        </table>
+        </div>
+    
+        <!-- copy table -->
+        <div class="container">
+            <h2>liked posts</h2>
+            <table class="table table-hover text-white">
+                <thead>
+                    <tr>
+                        <th scope="col"> Title </th>
+                        <th scope="col"> Content </th>
+                        <th scope="col"> Posted By </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for one_like in liked_posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
+                <tr>
+                    <td scope="row">{{one_like.title}}</td>
+                    <td scope="row">{{one_like.content}} </td>
+                    <td scope="row"> {{ one_like.first_name }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
     </div>
     </div>
 </body>
