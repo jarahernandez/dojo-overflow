@@ -12,7 +12,10 @@ def user_posts_and_create_page():
     data ={
         'id': session['user_id'],
     }
-    return render_template('my_posts.html', logged_in_user = user.User.get_user_id(data), posts_by_user = post.Post.get_posts_by_user_id(data), liked_posts = post.Post.get_liked_post_with_user(data), all_posts=post.Post.get_all_posts())
+    return render_template('my_posts.html', logged_in_user = user.User.get_user_id(data), 
+                           posts_by_user = post.Post.get_posts_by_user_id(data), 
+                           liked_posts = post.Post.get_liked_post_with_user(data), 
+                           all_posts=post.Post.get_all_posts())
 
 
 #Route that shows edit post page
