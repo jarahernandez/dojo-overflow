@@ -37,3 +37,77 @@
             background-image: url("../css/images/home.jpg");
             background-size: cover;
     }
+
+    .display-1 {
+        color: rgb(224, 20, 20);
+        font-family: sans-serif;
+        font-style: italic;
+        }
+    
+    .my-nav {
+        display: flex;
+        align-items: center;
+        padding:0px 20px;
+    
+    }
+    
+    .table-container { 
+        font: white !important;
+    }
+    
+    .section {
+        padding-bottom: 30px;
+        border-bottom: white 1px solid;
+    }
+
+    .card {
+        border-bottom:rgb(0, 0, 0);
+    }
+
+    hr.solid {
+        border-top: 3px solid #bbb;
+    }
+
+    a {
+        padding: 3%;
+    }
+
+    .card {
+        margin: 5%;
+        height: 500px;
+        width: 100px;
+        overflow: scroll;
+        padding-left: 25px;
+    }
+
+    
+    .table-container { 
+        font: white !important;
+    }
+    
+    .section {
+        padding-bottom: 30px;
+        border-bottom: white 1px solid;
+    }
+
+        /* width */
+    ::-webkit-scrollbar {
+        width: 20px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: red; 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b30000; 
+    }
