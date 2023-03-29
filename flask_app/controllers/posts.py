@@ -12,7 +12,7 @@ def user_posts_and_create_page():
     data ={
         'id': session['user_id'],
     }
-    return render_template('my_posts.html', logged_in_user = user.User.get_user_id(data), posts_by_user = post.Post.get_posts_by_user_id(data))
+    return render_template('my_posts.html', logged_in_user = user.User.get_user_id(data), posts_by_user = post.Post.get_posts_by_user_id(data), liked_posts = post.Post.get_liked_post_with_user(data), all_posts=post.Post.get_all_posts())
 
 
 #Route that shows edit post page
@@ -59,6 +59,19 @@ def update_post(id):
     }
     post.Post.update_post_on_db(data)
     return redirect('/posts/my_posts')
+
+
+#Route to link a post to a user when they click the like button.
+@app.route('/posts/like/<int:id>', methods = ['POST'])
+def like_post(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    data ={
+        'post_id': id,
+        'user_id': session['user_id']
+    }
+    post.Post.like_post_on_db(data)
+    return redirect('/dashboard')
 
 
 #Route to delete a post
