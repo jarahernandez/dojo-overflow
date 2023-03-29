@@ -1,7 +1,7 @@
 
 
     body {
-        background-color: black;
+        background-color: #020E1A;
     }
     
     .main-container {
@@ -30,4 +30,10 @@
     .section {
         padding-bottom: 30px;
         border-bottom: white 1px solid;
+    }
+
+    .my-nav { 
+            /* The image used */
+            background-image: url("../css/images/home.jpg");
+            background-size: cover;
     }
