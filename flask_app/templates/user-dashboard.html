@@ -42,8 +42,8 @@
                                 <!-- <a href="/posts/like/{{post.id}}"> Like Post</a>  <td> Needs JINJA CONFRIMFATION </td> -->
                             <td>
                                 {% if session['user_id'] == post.user.id %}
-                                    <a href="/posts/edit/{{post.post_id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                                    <a href="/posts/delete/{{post.post_id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/edit/{{post.id}}">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
+                                    <a href="/posts/delete/{{post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                                 {% else %}
                                 <form action="/posts/like/{{post.id}}" method="post">
                                     <input type="submit" value="Like Post"/> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
