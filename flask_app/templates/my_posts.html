@@ -30,7 +30,7 @@
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}                            
                     {% for message in messages %}            
-                        <p>{{message}}</p>                   
+                        <p style="color: red; text-align: center;">{{message}}</p>                   
                     {% endfor %}
                 {% endif %}
             {% endwith %} 
@@ -44,7 +44,7 @@
 
     <div class="d-flex">
         <div style="overflow-y:scroll; width:700px; height:300px; margin-right: 75px;">
-            <h2 class="text-white">Your posts</h2>
+            <h2 class="text-white" style="text-decoration:underline red 2px solid;">Your posts</h2>
             {% if posts_by_user[0].id != None %}
             <table class="table table-hover text-white" style="width: 600px; text-overflow: auto;">
                 <thead>
@@ -75,7 +75,7 @@
         
             <!-- copy table -->
             <div style="overflow-y:scroll; width:500px; height:300px">
-                <h2 class="text-white">Liked posts</h2>
+                <h2 class="text-white" style="text-decoration:underline red 2px solid;">Liked posts</h2>
                 <table class="table table-hover text-white" style="width: 400px; text-overflow: auto;">
                     <thead>
                         <tr>
