@@ -24,13 +24,13 @@
     
     
     <div class="d-flex flex-column align-items-center">
-        <div class="text-white p-2 d-flex flex-column align-items-center">
+        <div class="text-white p-2 d-flex flex-column align-items-center" style="margin-bottom:50px;">
             <h3 class="m-1"> Write a new post</h3>
             <form action="/posts/create" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}                            
                     {% for message in messages %}            
-                        <p>{{message}}</p>                   
+                        <p style="color: red; text-align: center;">{{message}}</p>                   
                     {% endfor %}
                 {% endif %}
             {% endwith %} 
@@ -42,17 +42,11 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="display-3 text-white"> My Posts </div>
-        <div class="table-responsive">
-        <table class="table table-hover text-white">
-            <thead>
-    <div style="display: inline-flex;">
-
-        <div class="container">
-            <h2>Your posts</h2>
+    <div class="d-flex">
+        <div style="overflow-y:scroll; width:700px; height:300px; margin-right: 75px;">
+            <h2 class="text-white" style="text-decoration:underline red 2px solid;">Your posts</h2>
             {% if posts_by_user[0].id != None %}
-            <table class="table table-hover text-white">
+            <table class="table table-hover text-white" style="width: 600px; text-overflow: auto;">
                 <thead>
                     <tr>
                         <th scope="col"> Title </th>
@@ -71,23 +65,6 @@
                         <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
                     </td>
                 </tr>
-            </thead>
-            <tbody>
-            {% for each_post in posts_by_user %} <!-- <td> should come from get_all_posts_user_id method </td> -->
-            <tr>
-                <td>{{each_post.title}}</td>
-                <td>{{each_post.content}} </td>
-                <!-- <td> NUMBER OF LIKES</td> -->
-                <td>
-
-                    <a href="/posts/edit/{{each_post.id}}" style="margin-right: 10px;">Edit</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                    <a href="/posts/delete/{{each_post.id}}">Delete</a> <!-- <td> Needs JINJA CONFRIMFATION </td> -->
-                </td>
-                    {% endfor %}
-                </td>
-            </tr> 
-        </tbody>
-    </table>
                 {% endfor %}
             {% else %} 
                 <h3>You don't have any posts yet!</h3>
@@ -95,29 +72,28 @@
             </tbody>
         </table>
         </div>
-    
-        <!-- copy table -->
-        <div class="container">
-            <h2>liked posts</h2>
-            <table class="table table-hover text-white">
-                <thead>
+        
+            <!-- copy table -->
+            <div style="overflow-y:scroll; width:500px; height:300px">
+                <h2 class="text-white" style="text-decoration:underline red 2px solid;">Liked posts</h2>
+                <table class="table table-hover text-white" style="width: 400px; text-overflow: auto;">
+                    <thead>
+                        <tr>
+                            <th scope="col"> Title </th>
+                            <th scope="col"> Content </th>
+                            <th scope="col"> Posted By </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for one_like in liked_posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
                     <tr>
-                        <th scope="col"> Title </th>
-                        <th scope="col"> Content </th>
-                        <th scope="col"> Posted By </th>
+                        <td scope="row">{{one_like.title}}</td>
+                        <td scope="row">{{one_like.content}} </td>
+                        <td scope="row"> {{ one_like.first_name }} </td>
                     </tr>
-                </thead>
-                <tbody>
-                {% for one_like in liked_posts %} <!-- <td> should come from get_all_posts_user_id method </td> -->
-                <tr>
-                    <td scope="row">{{one_like.title}}</td>
-                    <td scope="row">{{one_like.content}} </td>
-                    <td scope="row"> {{ one_like.first_name }} </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        </div>
-    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
     </div>
 </body>
