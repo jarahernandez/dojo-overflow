@@ -24,7 +24,7 @@
     
     
     <div class="d-flex flex-column align-items-center">
-        <div class="text-white p-2 d-flex flex-column align-items-center">
+        <div class="text-white p-2 d-flex flex-column align-items-center" style="margin-bottom:50px;">
             <h3 class="m-1"> Write a new post</h3>
             <form action="/posts/create" method="POST"> <!--JINJA ALL NEEDS REVIEW + ROUTE -->
                 {% with messages = get_flashed_messages() %}
@@ -43,10 +43,10 @@
     </div>
 
     <div class="d-flex">
-        <div class="container">
+        <div style="overflow-y:scroll; width:700px; height:300px; margin-right: 75px;">
             <h2 class="text-white">Your posts</h2>
             {% if posts_by_user[0].id != None %}
-            <table class="table table-hover text-white">
+            <table class="table table-hover text-white" style="width: 600px; text-overflow: auto;">
                 <thead>
                     <tr>
                         <th scope="col"> Title </th>
@@ -74,9 +74,9 @@
         </div>
         
             <!-- copy table -->
-            <div class="container">
+            <div style="overflow-y:scroll; width:500px; height:300px">
                 <h2 class="text-white">Liked posts</h2>
-                <table class="table table-hover text-white">
+                <table class="table table-hover text-white" style="width: 400px; text-overflow: auto;">
                     <thead>
                         <tr>
                             <th scope="col"> Title </th>
