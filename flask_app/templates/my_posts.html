@@ -67,7 +67,7 @@
                 </tr>
                 {% endfor %}
             {% else %} 
-                <h3>You don't have any posts yet!</h3>
+                <h3 style="color: #364587;">You don't have any posts yet!</h3>
             {% endif %}
             </tbody>
         </table>
@@ -76,6 +76,7 @@
             <!-- copy table -->
             <div style="overflow-y:scroll; width:500px; height:300px">
                 <h2 class="text-white" style="text-decoration:underline red 2px solid;">Liked posts</h2>
+                {% if liked_posts != () %}
                 <table class="table table-hover text-white" style="width: 400px; text-overflow: auto;">
                     <thead>
                         <tr>
@@ -92,6 +93,9 @@
                         <td scope="row"> {{ one_like.first_name }} </td>
                     </tr>
                     {% endfor %}
+                    {% else %}
+                    <h3 style="color: #364587;">You haven't liked any posts yet!</h3>
+                    {% endif%}
                 </tbody>
             </table>
             </div>

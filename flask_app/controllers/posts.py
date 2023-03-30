@@ -69,6 +69,13 @@ def update_post(id):
 def like_post(id):
     if 'user_id' not in session:
         return redirect('/')
+    user_post_ids = {
+        'post_id': id,
+        'user_id': session['user_id']
+    }
+    if not post.Post.validate_like(user_post_ids):
+        return redirect('/dashboard')
+    post.Post.get_like_by_user_post_id(user_post_ids)
     data ={
         'post_id': id,
         'user_id': session['user_id']

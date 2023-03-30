@@ -66,10 +66,10 @@ class User:
     def validate_create(user):
         is_valid = True
         if len(user['email']) < 6:
-            flash("email is too short.")
+            flash("Email is too short.", "register")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
-            flash("email not in correct format!")
+            flash("Email not in correct format!", "register")
             is_valid = False
         data ={
                 "email": user['email']
@@ -77,18 +77,18 @@ class User:
         user_in_db = User.get_email(data)
         print('A',user_in_db)
         if user_in_db:
-            flash("Email already taken.")
+            flash("Email already taken.", "register")
             is_valid = False
         if len(user['first_name']) < 3:
-            flash("First name is too short!")
+            flash("First name is too short!", "register")
             is_valid = False
         if len(user['last_name']) < 2:
-            flash("Last name is too short!")
+            flash("Last name is too short!", "register")
             is_valid = False
         if len(user['password']) < 8:
-            flash("password too short!")
+            flash("Password too short!", "register")
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash("passwords do not match!")
+            flash("Passwords do not match!", "register")
             is_valid = False
         return is_valid

@@ -140,14 +140,9 @@ class Post:
         ;"""
         return connectToMySQL(cls.DB).query_db(query, data)
     
+    #Get the liked post with post and user's data
     @classmethod
     def get_liked_post_with_user(cls, data):
-        # query = """
-        # SELECT * FROM post_favorites 
-        # LEFT JOIN posts 
-        # ON post_favorites.posts_id = posts.id 
-        # WHERE post_favorites.users_id = %(id)s
-        # ;"""
         query = """
         SELECT * FROM post_favorites 
         LEFT JOIN posts 
@@ -159,6 +154,18 @@ class Post:
         print(results)
         return results
 
+    #Get a like using both the user and post ids
+    @classmethod
+    def get_like_by_user_post_id(cls, data):
+        query= """
+        SELECT * FROM post_favorites 
+        WHERE users_id=%(user_id)s AND posts_id=%(post_id)s
+        ;"""
+        result = connectToMySQL(cls.DB).query_db(query, data)
+        print("X--->",result)
+        if result == ():
+            return True
+        return False
 
     #Validations
     @staticmethod
@@ -169,5 +176,14 @@ class Post:
             is_valid = False
         if len(form_data['content']) < 10:
             flash('Content must be at least 10 characters long')
+            is_valid = False
+        return is_valid
+    
+    #Validating a like
+    @staticmethod
+    def validate_like(user_post_ids):
+        is_valid = True
+        if Post.get_like_by_user_post_id(user_post_ids) == False:
+            flash('Post already liked')
             is_valid = False
         return is_valid
